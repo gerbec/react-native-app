@@ -29,16 +29,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 150,
-    flex: 1,
     flexDirection: "column",
     display: "flex",
-    position: "relative",
-    overflow: "hidden",
-    borderRadius: 8,
   },
 
   image: {
     width: "100%",
+    marginVertical: 5
   },
   textContainer: {
     width: "100%",

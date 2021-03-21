@@ -105,9 +105,6 @@ const App = () => {
             AltText={"From The College Juice"}
           ></ImageCard>
           <Card data={dataFashion}></Card>
-          
-          
-          
         </ScrollView>
       </>
     );
@@ -115,21 +112,10 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ECF0F1",
-  },
   safeArea: {
-    margin: 8,
-  },
-  buttonsContainer: {
     padding: 10,
-  },
-  textStyle: {
-    textAlign: "center",
-    marginBottom: 8,
-    fontFamily: "Roboto_500Medium",
-  },
+    backgroundColor: "#f6f6f6",
+  }
 });
 
 export default App;

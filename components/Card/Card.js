@@ -6,26 +6,40 @@ const Card = ({ data, ...props }) => {
   const quantity = data.items.length;
   const styleCardContainer =
     quantity > 1 ? styles.cardsContainerRow : styles.cardsContainerCol;
-  const styleCard = quantity > 1 ? styles.card : styles.card;
+  const styleCard = quantity > 1;
 
   return (
     <>
       <View style={[styleCardContainer]}>
         {data.items.map((item, index) => {
           return (
-            <View style={[styles.card, styles[data.name]]} key={index}>
+            <View style={[styles.card, styles[data.name], (styleCard ? styles.cardSmall : '') ]} key={index}>
               <View style={styles.cardContent}>
                 <Text style={[styles.categoryTitle, styles[data.name]]}>
                   {data.title}
                 </Text>
-                <View style={styles.itemImageContainer}>
+                <View
+                  style={
+                    styleCard
+                      ? styles.itemImageContainerAdjust
+                      : styles.itemImageContainer
+                  }
+                >
                   <Image
-                    style={styles.itemImage}
+                    style={
+                      styleCard ? styles.itemImageAdjust : styles.itemImage
+                    }
                     source={images.photo[item.image]}
                   />
                 </View>
                 <View style={styles.descriptionContainer}>
-                  <Text style={styles.description}>{item.description}</Text>
+                  <Text
+                    style={[
+                      styleCard ? styles.descriptionAdjust : styles.description,
+                    ]}
+                  >
+                    {item.description}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -38,38 +52,36 @@ const Card = ({ data, ...props }) => {
 export default Card;
 
 const styles = StyleSheet.create({
-  // 1 container, 2 classes
-  cardsContainerCol: {
-    display: "flex",
-    flexDirection: "column",
-  },
   cardsContainerRow: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "space-between",
+    width:'100%',
   },
 
   // custom classes when it's only 1 item in the category
 
   card: {
-    height: 300,
-    borderRadius: 8,
-    margin: 8,
-    elevation: 3,
+    display: "flex",
+    flexDirection: "column",
+    elevation: 1,
     shadowOffset: { widht: 1, height: 1 },
-    shadowColor: "#333",
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    marginHorizontal: 4,
-    marginVertical: 6,
+    shadowColor: "#333333",
+    shadowOpacity: 0.2,
+    shadowRadius: 1,
     backgroundColor: "#ffffff",
     borderTopWidth: 5,
     borderStyle: "solid",
-    display: "flex",
-    flexDirection: "column", 
-    flex:1,
-    flexGrow: 2,
-    flexBasis: '47%'
+    marginVertical: 5,
+    height: 300,
+    borderRadius: 8,
+    margin: 0,
+    
+  },
+  cardSmall:{
+    flexBasis:'48%',
+    height: 200
   },
 
   categoryTitle: {
@@ -94,19 +106,37 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 250,
   },
-
+  descriptionAdjust: {
+    fontSize: 13,
+    lineHeight: 15,
+    letterSpacing: -0.24,
+    padding: 10,
+    paddingBottom:16,
+    textAlign: "center",
+  },
   itemImageContainer: {
-    marginTop: 12,
+    marginBottom: 8,
     marginLeft: 27,
     marginRight: 27,
-    marginBottom: 8,
+    marginTop: 12,
+  },
+  itemImageContainerAdjust: {
+    marginTop: 7,
+    marginLeft: 27,
+    marginRight: 27,
+    marginBottom: 0,
   },
   itemImage: {
     resizeMode: "contain",
     height: 180,
     width: "100%",
   },
-  // custom classes when it's more than 1 item in the category
+  itemImageAdjust: {
+    height: 110,
+    resizeMode: "contain",
+    width: "100%",
+  },
+  
 
   //categories
 
