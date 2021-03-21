@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
 import Header from "./components/Header";
 import AppLoading from "expo-app-loading";
 import {
@@ -10,10 +10,73 @@ import {
 } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 import ImageCard from "./components/ImageCard";
-import BigCard from "./components/BigCard";
+import Card from "./components/Card";
 
 const App = () => {
   const [selectedTheme, setSelectedTheme] = useState("RedTheme");
+
+  const dataSports = {
+    name: "sports",
+    title: "Sports & outdoors",
+    items: [
+      {
+        alt: "bike",
+        image: "bike",
+        description: "Diamond Clarity St Performance Hybrid Bike, 16 Inch.",
+        price: "$58",
+      },
+    ],
+  };
+
+  const dataElectronics = {
+    name: "electronics",
+    title: "Electronics",
+    items: [
+      {
+        alt: "case",
+        image: "case",
+        description: "Keyscaper Emblematic iPhone 6 Clear Case",
+        price: "$30",
+      },
+      {
+        alt: "musicplayer",
+        image: "musicplayer",
+        description: "Boston University Bluetooth Music Player",
+        price: "$20",
+      },
+      {
+        alt: "case",
+        image: "case",
+        description: "Keyscaper Emblematic iPhone 6 Clear Case",
+        price: "$30",
+      },
+      {
+        alt: "musicplayer",
+        image: "musicplayer",
+        description: "Boston University Bluetooth Music Player",
+        price: "$20",
+      },
+    ],
+  };
+
+  const dataFashion = {
+    name: "fashion",
+    title: "Fashion",
+    items: [
+      {
+        alt: "fleece",
+        image: "fleece",
+        description: "League Chelsea Full Zip Fleece",
+        price: "$99",
+      },
+      {
+        alt: "cap",
+        image: "cap",
+        description: "Boston Terriers Legacy Adjustable Hat",
+        price: "$45",
+      },
+    ],
+  };
 
   let [fontsLoaded] = useFonts({
     Roboto_500Medium,
@@ -34,17 +97,17 @@ const App = () => {
             Title={"8 Ways to stay active during the Summer"}
             AltText={"From The College Juice"}
           ></ImageCard>
-          <BigCard
-            category={"sports"}
-            title={"Sports & Outdoors"}
-            itemImage={"bike"}
-            description={"Diamond Clarity St Performance Hybrid Bike, 16 Inch."}
-          ></BigCard>
+          <Card data={dataSports}></Card>
+          <Card data={dataElectronics}></Card>
           <ImageCard
             bgImage={"2"}
             Title={"8 Ways to stay active during the Summer"}
             AltText={"From The College Juice"}
           ></ImageCard>
+          <Card data={dataFashion}></Card>
+          
+          
+          
         </ScrollView>
       </>
     );
@@ -58,7 +121,6 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     margin: 8,
-
   },
   buttonsContainer: {
     padding: 10,

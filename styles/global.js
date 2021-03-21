@@ -41,5 +41,9 @@ export const images = {
     1: require("../assets/photo.png"),
     2: require("../assets/photo2.png"),
     bike: require("../assets/bike.png"),
+    case: require("../assets/case.png"),
+    musicplayer: require("../assets/musicplayer.png"),
+    fleece: require("../assets/fleece.png"),
+    cap: require("../assets/cap.png"),
   },
 };
