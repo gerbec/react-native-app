@@ -1,82 +1,33 @@
-import React, { useState } from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
-import Header from "./components/Header";
+import React, { useState, useEffect } from "react";
+import { Animated, StyleSheet, ScrollView, View, Text } from "react-native";
 import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
 import {
   Roboto_300Light,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-import { useFonts } from "expo-font";
+
+import Header from "./components/Header";
 import ImageCard from "./components/ImageCard";
-import Card from "./components/Card";
+import CardList from "./components/CardList";
+import Footer from "./components/Footer";
+
+import { dataSports, dataElectronics, dataFashion } from "./utils/data";
 
 const App = () => {
-  const [selectedTheme, setSelectedTheme] = useState("RedTheme");
+  const [enableAnimation, setEnableAnimation] = useState(false);
 
-  const dataSports = {
-    name: "sports",
-    title: "Sports & outdoors",
-    items: [
-      {
-        alt: "bike",
-        image: "bike",
-        description: "Diamond Clarity St Performance Hybrid Bike, 16 Inch.",
-        price: "$58",
-      },
-    ],
+  const open = () => {
+    setEnableAnimation(true);
   };
 
-  const dataElectronics = {
-    name: "electronics",
-    title: "Electronics",
-    items: [
-      {
-        alt: "case",
-        image: "case",
-        description: "Keyscaper Emblematic iPhone 6 Clear Case",
-        price: "$30",
-      },
-      {
-        alt: "musicplayer",
-        image: "musicplayer",
-        description: "Boston University Bluetooth Music Player",
-        price: "$20",
-      },
-      {
-        alt: "case",
-        image: "case",
-        description: "Keyscaper Emblematic iPhone 6 Clear Case",
-        price: "$30",
-      },
-      {
-        alt: "musicplayer",
-        image: "musicplayer",
-        description: "Boston University Bluetooth Music Player",
-        price: "$20",
-      },
-    ],
+  const close = () => {
+    setEnableAnimation(false);
   };
 
-  const dataFashion = {
-    name: "fashion",
-    title: "Fashion",
-    items: [
-      {
-        alt: "fleece",
-        image: "fleece",
-        description: "League Chelsea Full Zip Fleece",
-        price: "$99",
-      },
-      {
-        alt: "cap",
-        image: "cap",
-        description: "Boston Terriers Legacy Adjustable Hat",
-        price: "$45",
-      },
-    ],
-  };
+
 
   let [fontsLoaded] = useFonts({
     Roboto_500Medium,
@@ -89,24 +40,30 @@ const App = () => {
     return <AppLoading />;
   } else {
     return (
-      <>
-        <Header selectedTheme={selectedTheme} fontsToUse={[fontsLoaded]} />
+      <View>
+        <Header
+     
+          
+          enableAnimation={enableAnimation}
+        />
+        
         <ScrollView style={styles.safeArea}>
           <ImageCard
             bgImage={"1"}
             Title={"8 Ways to stay active during the Summer"}
             AltText={"From The College Juice"}
           ></ImageCard>
-          <Card data={dataSports}></Card>
-          <Card data={dataElectronics}></Card>
+          <CardList data={dataSports} open={open} close={close}></CardList>
+          <CardList data={dataElectronics} open={open} close={close}></CardList>
           <ImageCard
             bgImage={"2"}
             Title={"8 Ways to stay active during the Summer"}
             AltText={"From The College Juice"}
           ></ImageCard>
-          <Card data={dataFashion}></Card>
+          <CardList data={dataFashion} open={open} close={close}></CardList>
         </ScrollView>
-      </>
+        <Footer enableAnimation={enableAnimation} />
+      </View>
     );
   }
 };
@@ -115,7 +72,14 @@ const styles = StyleSheet.create({
   safeArea: {
     padding: 10,
     backgroundColor: "#f6f6f6",
-  }
+  },
+  cardHeader: {
+    height: 145,
+    position: "absolute",
+    width: "100%",
+    top: 0,
+    zIndex: 100,
+  },
 });
 
 export default App;

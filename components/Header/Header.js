@@ -1,38 +1,60 @@
 import React, { useState } from "react";
-import { StatusBar, View, Text, StyleSheet, Switch } from "react-native";
-import { Roboto_500Medium } from "@expo-google-fonts/roboto";
-import { useFonts } from "expo-font";
+import {
+  StatusBar,
+  View,
+  Text,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
+
 import FilterIcon from "../../assets/icons/FilterIcon";
 
-const Header = ({ selectedTheme }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
-  let [fontsLoaded] = useFonts({
-    Roboto_500Medium,
-  });
+const Header = ({ enableAnimation }) => {
+  const [isEnabled, setIsEnabled] = useState(true);
+  const toggleSwitch = () => {
+    setIsEnabled((isEnabled) => !isEnabled);
+  };
+  const [selectedTheme, setSelectedTheme] = useState("RedTheme");
 
   return (
     <>
-      <StatusBar barStyle={"light-content"} />
-      <View style={[styles.statusbarStyle, styles[selectedTheme]]}></View>
-      <View style={[styles.header, styles[selectedTheme]]}>
+      {Platform.OS ? (
+        <StatusBar barStyle={"light-content"} hidden={enableAnimation} />
+      ) : (
+        ""
+      )}
+      <View
+        style={[
+          styles.statusbarStyle,
+          isEnabled ? styles.redTheme : styles.purpleTheme,
+        ]}
+      ></View>
+      <View
+        style={[
+          styles.header,
+          isEnabled
+            ? { backgroundColor: "hsl(351 ,63% ,48%)" }
+            : { backgroundColor: "#8947C8" },
+        ]}
+      >
         <View style={styles.empty}></View>
         <Text style={styles.headerText}>My Feed</Text>
-        <View style={styles.filterContainer}>
-          <FilterIcon/>
-        </View>
+        <TouchableOpacity onPress={toggleSwitch} style={styles.filterContainer}>
+          <FilterIcon />
+        </TouchableOpacity>
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  RedTheme: {
+  redTheme: {
     backgroundColor: "hsl(351 ,63% ,48%)",
   },
-  PurpleTheme: {
-    backgroundColor: "hsl(351 ,63% ,48%)",
+  purpleTheme: {
+    backgroundColor: "#8947C8",
   },
   statusbarStyle: {
     height: 48,
@@ -46,9 +68,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    height:44,
-    paddingLeft:19,
-    paddingRight:19,
+    height: 44,
+    paddingLeft: 19,
+    paddingRight: 19,
   },
   headerText: {
     fontFamily: "Roboto_500Medium",
@@ -57,7 +79,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     textAlign: "center",
     color: "#ffffff",
-    
   },
   empty: {
     width: 44,

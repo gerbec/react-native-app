@@ -1,52 +1,118 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Animated,
+  TouchableWithoutFeedback,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
 import { images } from "../../styles/global";
 
-const Card = ({ data, ...props }) => {
-  const quantity = data.items.length;
-  const styleCardContainer =
-    quantity > 1 ? styles.cardsContainerRow : styles.cardsContainerCol;
-  const styleCard = quantity > 1;
+const Card = ({
+  length,
+  name,
+  image,
+  description,
+  title,
+  open,
+  close,
+  ...props
+}) => {
+  const styleCard = length > 1;
+
+  const animatedValue = React.useRef(new Animated.Value(0)).current;
+
+  const scaleInterpolation = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.6],
+  });
+
+  const opacityInterpolation = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1],
+  });
+
+  const showHide = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+  });
+
+  const positionInterpolation = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -70],
+  });
+
+  const [isEnabled, setIsEnabled] = useState(false);
+ 
+
+  const startAnimation = () => {
+    open();
+    // setEnableAnimation(true),
+    // console.log(enableAnimation),
+    Animated.spring(animatedValue, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const stopAnimation = (value) => {
+    close();
+    // setEnableAnimation(false),
+    // console.log(enableAnimation),
+    Animated.spring(animatedValue, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
+  };
+
+
+  const animatedImageStyles = {
+    transform: [
+      { scale: scaleInterpolation },
+      { translateY: positionInterpolation },
+    ],
+    opacity: opacityInterpolation,
+  };
+
+  const showHideStyles = {
+    opacity: showHide,
+  };
 
   return (
-    <>
-      <View style={[styleCardContainer]}>
-        {data.items.map((item, index) => {
-          return (
-            <View style={[styles.card, styles[data.name], (styleCard ? styles.cardSmall : '') ]} key={index}>
-              <View style={styles.cardContent}>
-                <Text style={[styles.categoryTitle, styles[data.name]]}>
-                  {data.title}
-                </Text>
-                <View
-                  style={
-                    styleCard
-                      ? styles.itemImageContainerAdjust
-                      : styles.itemImageContainer
-                  }
-                >
-                  <Image
-                    style={
-                      styleCard ? styles.itemImageAdjust : styles.itemImage
-                    }
-                    source={images.photo[item.image]}
-                  />
-                </View>
-                <View style={styles.descriptionContainer}>
-                  <Text
-                    style={[
-                      styleCard ? styles.descriptionAdjust : styles.description,
-                    ]}
-                  >
-                    {item.description}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          );
-        })}
+    <TouchableWithoutFeedback onPressIn={startAnimation} onPressOut={stopAnimation}>
+      <View style={[styles.card, styles[name], styleCard && styles.cardSmall]}>
+        <View style={styles.cardContent}>
+          <Text style={[styles.categoryTitle, styles[name]]}>{title}</Text>
+          <View
+            style={
+              styleCard
+                ? styles.itemImageContainerAdjust
+                : styles.itemImageContainer
+            }
+          >
+            <Animated.Image
+              style={[
+                styleCard ? styles.itemImageAdjust : styles.itemImage,
+                animatedImageStyles,
+              ]}
+              source={images.photo[image]}
+              resizeMode="contain"
+            ></Animated.Image>
+          </View>
+          <Animated.View style={[styles.descriptionContainer, showHideStyles]}>
+            <Text
+              style={[
+                styleCard ? styles.descriptionAdjust : styles.description,
+              ]}
+            >
+              {description}
+            </Text>
+          </Animated.View>
+        </View>
       </View>
-    </>
+    </TouchableWithoutFeedback>
   );
 };
 export default Card;
@@ -57,10 +123,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    width:'100%',
+    width: "100%",
   },
-
-  // custom classes when it's only 1 item in the category
 
   card: {
     display: "flex",
@@ -77,11 +141,11 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 8,
     margin: 0,
-    
   },
-  cardSmall:{
-    flexBasis:'48%',
-    height: 200
+
+  cardSmall: {
+    flexBasis: "48%",
+    height: 200,
   },
 
   categoryTitle: {
@@ -98,6 +162,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
+
   description: {
     fontFamily: "Roboto_500Medium",
     fontSize: 17,
@@ -106,37 +171,40 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 250,
   },
+
   descriptionAdjust: {
     fontSize: 13,
     lineHeight: 15,
     letterSpacing: -0.24,
     padding: 10,
-    paddingBottom:16,
+    paddingBottom: 16,
     textAlign: "center",
   },
+
   itemImageContainer: {
     marginBottom: 8,
     marginLeft: 27,
     marginRight: 27,
     marginTop: 12,
   },
+
   itemImageContainerAdjust: {
     marginTop: 7,
     marginLeft: 27,
     marginRight: 27,
     marginBottom: 0,
   },
+
   itemImage: {
-    resizeMode: "contain",
     height: 180,
     width: "100%",
   },
+
   itemImageAdjust: {
     height: 110,
     resizeMode: "contain",
     width: "100%",
   },
-  
 
   //categories
 
@@ -144,14 +212,17 @@ const styles = StyleSheet.create({
     borderTopColor: "#333333",
     color: "#333333",
   },
+
   sports: {
     borderTopColor: "#219653",
     color: "#219653",
   },
+
   electronics: {
     borderTopColor: "#F2994A",
     color: "#F2994A",
   },
+
   fashion: {
     borderTopColor: "#2F80ED",
     color: "#2F80ED",
