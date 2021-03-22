@@ -4,7 +4,7 @@
 
 We create this new app to invstigate how to work with React Native, here i use tools like "Expo" that help so much.
 it's so different from React js, well, all the structure of building components, how to reuse nesting styles, the animations.
-I think that it's very interesting about to have a powerfull way to create an application for every mobile plattaform as an app, also havving the oportunity of compile it directly. 
+I think that it's very interesting about to have a powerfull way to create an application for every mobile plattaform as an app, also having the oportunity of compile it directly. 
 
 Libraries used:
 
