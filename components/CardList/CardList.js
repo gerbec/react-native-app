@@ -1,19 +1,11 @@
-import React, { Children, useState } from "react";
-import {
-  Animated,
-  TouchableWithoutFeedback,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { images } from "../../styles/global";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import Card from "../Card/Card";
 
 const CardList = ({ data, open, close, ...props }) => {
   const quantity = data.items.length;
   const styleCard = quantity > 1;
-  
+
   return (
     <>
       <View style={styleCard && styles.cardsContainerRow}>

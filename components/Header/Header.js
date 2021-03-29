@@ -13,9 +13,11 @@ import FilterIcon from "../../assets/icons/FilterIcon";
 
 const Header = ({ enableAnimation }) => {
   const [isEnabled, setIsEnabled] = useState(true);
+  
   const toggleSwitch = () => {
     setIsEnabled((isEnabled) => !isEnabled);
   };
+
   const [selectedTheme, setSelectedTheme] = useState("RedTheme");
 
   return (

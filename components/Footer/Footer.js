@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Animated,
-  View,
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
-import { Roboto_500Medium } from "@expo-google-fonts/roboto";
-import { useFonts } from "expo-font";
 import Feed from "../../assets/icons/Feed";
 import Notification from "../../assets/icons/Notification";
 import Wishlist from "../../assets/icons/Wishlist";
