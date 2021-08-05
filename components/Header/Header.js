@@ -9,60 +9,42 @@ import {
   Platform,
 } from "react-native";
 
-import FilterIcon from "../../assets/icons/FilterIcon";
+const Header = ({  }) => {
 
-const Header = ({ enableAnimation }) => {
-  const [isEnabled, setIsEnabled] = useState(true);
-  
-  const toggleSwitch = () => {
-    setIsEnabled((isEnabled) => !isEnabled);
-  };
-
-  const [selectedTheme, setSelectedTheme] = useState("RedTheme");
 
   return (
     <>
       {Platform.OS ? (
-        <StatusBar barStyle={"light-content"} hidden={enableAnimation} />
+        <StatusBar barStyle={"light-content"} />
       ) : (
         ""
       )}
       <View
-        style={[
-          styles.statusbarStyle,
-          isEnabled ? styles.redTheme : styles.purpleTheme,
-        ]}
+        style={
+          styles.statusbarStyle
+        }
       ></View>
       <View
-        style={[
-          styles.header,
-          isEnabled
-            ? { backgroundColor: "hsl(351 ,63% ,48%)" }
-            : { backgroundColor: "#8947C8" },
-        ]}
+        style={
+          styles.header
+
+        }
       >
         <View style={styles.empty}></View>
-        <Text style={styles.headerText}>My Feed</Text>
-        <TouchableOpacity onPress={toggleSwitch} style={styles.filterContainer}>
-          <FilterIcon />
-        </TouchableOpacity>
+        <Text style={styles.headerText}>CPI pilots</Text>
+        <View style={styles.empty}></View>
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  redTheme: {
-    backgroundColor: "hsl(351 ,63% ,48%)",
-  },
-  purpleTheme: {
-    backgroundColor: "#8947C8",
-  },
   statusbarStyle: {
-    height: 48,
+    height: 'auto',
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "hsl(351 ,63% ,48%)",
   },
   header: {
     width: "100%",
@@ -73,6 +55,7 @@ const styles = StyleSheet.create({
     height: 44,
     paddingLeft: 19,
     paddingRight: 19,
+    backgroundColor: "hsl(351 ,63% ,48%)",
   },
   headerText: {
     fontFamily: "Roboto_500Medium",

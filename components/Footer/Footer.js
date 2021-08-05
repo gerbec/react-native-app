@@ -6,22 +6,18 @@ import {
 } from "react-native";
 import Feed from "../../assets/icons/Feed";
 import Notification from "../../assets/icons/Notification";
-import Wishlist from "../../assets/icons/Wishlist";
 import Profile from "../../assets/icons/Profile";
 
-const Footer = ({ enableAnimation }) => {
+const Footer = ({ }) => {
 
   return (
     <>
-      <Animated.View style={[styles.footer,  enableAnimation && styles.hide ]}>
+      <Animated.View style={styles.footer}>
         <TouchableWithoutFeedback>
           <Feed />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback>
           <Notification />
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback>
-          <Wishlist />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback>
           <Profile />
@@ -48,10 +44,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     width:'100%',
     position:'absolute',
-    bottom:90
-  },
-  hide: {
-    bottom: -10
+    bottom:20
   }
 });
 

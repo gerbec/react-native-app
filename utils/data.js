@@ -1,50 +1,30 @@
-export const dataSports = {
-    name: "sports",
-    title: "Sports & outdoors",
-    items: [
+export const data = [
       {
-        alt: "bike",
-        image: "bike",
-        description: "Diamond Clarity St Performance Hybrid Bike, 16 Inch.",
-        price: "$58",
+        id: '1',
+        status: 'active',
+        startDate:'01/08/2021',
+        endDate:'10/08/2021',
+        startLocation:'Buenos Aires (BS)',
+        endLocation:'Puerto Madryn',
+        boat:{
+          name:'Black Pearl',
+          flag:'Argentina',
+          cs:'9v6599',
+          imo:'9470911',
+          loa:'183.17',
+          breadth:'32.20',
+          depth:'18.80',
+          cf:'139',
+          sdrf:'12,425',
+          grt:'29130',
+        },
+        agency:'Sur Management',
+        channel:'EMI',
+        pilots:'2',
+        serviceQuality:'-',
+        maniobra:'-',
+        externalServices:'-',
       },
-    ],
-  };
+    ];
 
-  export const dataElectronics = {
-    name: "electronics",
-    title: "Electronics",
-    items: [
-      {
-        alt: "case",
-        image: "case",
-        description: "Keyscaper Emblematic iPhone 6 Clear Case",
-        price: "$30",
-      },
-      {
-        alt: "musicplayer",
-        image: "musicplayer",
-        description: "Boston University Bluetooth Music Player",
-        price: "$20",
-      }
-    ],
-  };
 
-  export const dataFashion = {
-    name: "fashion",
-    title: "Fashion",
-    items: [
-      {
-        alt: "fleece",
-        image: "fleece",
-        description: "League Chelsea Full Zip Fleece",
-        price: "$99",
-      },
-      {
-        alt: "cap",
-        image: "cap",
-        description: "Boston Terriers Legacy Adjustable Hat",
-        price: "$45",
-      },
-    ],
-  };

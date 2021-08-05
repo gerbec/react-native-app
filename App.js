@@ -10,11 +10,10 @@ import {
 } from "@expo-google-fonts/roboto";
 
 import Header from "./components/Header";
-import ImageCard from "./components/ImageCard";
 import CardList from "./components/CardList";
 import Footer from "./components/Footer";
 
-import { dataSports, dataElectronics, dataFashion } from "./utils/data";
+import { data } from "./utils/data";
 
 const App = () => {
   const [enableAnimation, setEnableAnimation] = useState(false);
@@ -41,28 +40,11 @@ const App = () => {
   } else {
     return (
       <View>
-        <Header
-     
-          
-          enableAnimation={enableAnimation}
-        />
-        
+        <Header/>
         <ScrollView style={styles.safeArea}>
-          <ImageCard
-            bgImage={"1"}
-            Title={"8 Ways to stay active during the Summer"}
-            AltText={"From The College Juice"}
-          ></ImageCard>
-          <CardList data={dataSports} open={open} close={close}></CardList>
-          <CardList data={dataElectronics} open={open} close={close}></CardList>
-          <ImageCard
-            bgImage={"2"}
-            Title={"8 Ways to stay active during the Summer"}
-            AltText={"From The College Juice"}
-          ></ImageCard>
-          <CardList data={dataFashion} open={open} close={close}></CardList>
+          <CardList data={data}></CardList>
         </ScrollView>
-        <Footer enableAnimation={enableAnimation} />
+        <Footer/>
       </View>
     );
   }
@@ -72,6 +54,7 @@ const styles = StyleSheet.create({
   safeArea: {
     padding: 10,
     backgroundColor: "#f6f6f6",
+    height: "100%"
   },
   cardHeader: {
     height: 145,
