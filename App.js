@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
+import { StyleSheet, ScrollView, View, Text, Switch } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import {
@@ -41,7 +41,9 @@ const App = () => {
     return (
       <View>
         <Header/>
+        
         <ScrollView style={styles.safeArea}>
+        <View style={styles.actionTopBar}><Text style={styles.actionTopBarText}>Only my services</Text><Switch value={true}></Switch></View>
           <CardList data={data}></CardList>
         </ScrollView>
         <Footer/>
@@ -52,9 +54,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    padding: 10,
     backgroundColor: "#f6f6f6",
-    height: "100%"
+    height: "100%",
+    paddingTop:12,
+    paddingHorizontal:12,
   },
   cardHeader: {
     height: 145,
@@ -63,6 +66,18 @@ const styles = StyleSheet.create({
     top: 0,
     zIndex: 100,
   },
+  actionTopBar:{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop:12,
+    marginBottom:24
+  },
+  actionTopBarText:{
+    marginRight:8
+  }
 });
 
 export default App;

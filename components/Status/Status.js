@@ -13,7 +13,7 @@ const Status = ({
   return (
   
       <View style={styles.status}>
-        <Text>{text}</Text>
+        <Text style={styles.text}>{text}</Text>
       </View>
  
   );
@@ -26,10 +26,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     elevation: 1,
     borderWidth: 0,
-    borderRadius: 8,
+    borderRadius: 4,
     padding: 4,
     margin: 0,
-    width:'100'
+    width:100,
+    backgroundColor: '#E6F7FF',
+    borderColor: '#91D5FF',
+    borderStyle: 'solid',
+    borderWidth:1,
+    alignItems:'center',
+    justifyContent:'center'
   },
+  text:{
+    color: '#1890FF',
+    margin: 'auto',
+    fontSize: 14
+  }
 
 });

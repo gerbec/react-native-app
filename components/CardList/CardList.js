@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Card from "../Card/Card";
 
 const CardList = ({ data }) => {
@@ -7,8 +7,11 @@ const CardList = ({ data }) => {
   return (
     <>
       <View style={styles.cardsContainerRow}>
+        <View style={styles.cardsContainerRow}> 
+          <Text style={styles.columnTitle}>Despacho</Text>
+          <Text style={styles.columnTitle}>Estado</Text>
+        </View>
         {data.map((trip, index) => {
-
           return (
             <Card
               data={trip}
@@ -29,4 +32,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
   },
+  columnTitle:{
+    paddingHorizontal: 12,
+    paddingVertical:8
+  }
 });

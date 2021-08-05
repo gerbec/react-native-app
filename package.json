@@ -17,6 +17,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^7.12.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-image-overlay": "^0.1.2",
     "react-native-svg": "12.1.0",
